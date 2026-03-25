@@ -3,3 +3,6 @@ git commit -m "Added initial MATLAB files"
 git add .
 git commit -m "Updated function"
 git push
+git add .
+git commit -m "Updated function"
+git push
