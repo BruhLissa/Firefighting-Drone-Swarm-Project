@@ -1,23 +1,25 @@
-function fire = FireInit(param)
+function fire = FireInit(params)
 %FIREINIT will initiate the fire. Starting from the grid size. We'll have a
 %fire_start that will initial start with 3 cells of fire randomally
 %generated into the grid. These 3 cells will be populated with a randomly
 %generated intensity value between 0 and 1.
 
-    rows = param
-    cols = param
+    rng(params.rng_seed + 10);
 
-    Grid = rows, cols
-
-    % Initial amount of fires we're start with
-    fire_start = 3;
-
-    fire_intesity = %values between 0 and 1
-
-
-    for ii < fire_start
-        rows = rand() %populate/replace grid w/ fire intensity value
-        cols = rand() %populate/replace grid w/ fire intensity value
+    rows = params.grid_size(1);
+    cols = params.grid_size(2);
+    
+    fire.intensity = zeros(rows, cols);
+    fire.time = 0;
+    
+    placed = 0;
+    while placed < params.start_fires
+        r = randi(rows);
+        c = randi(cols);
+    
+        if fire.intensity(r, c) == 0
+            fire.intensity(r, c) = params.seed_low + (params.seed_high - params.seed_low) * rand();
+            placed = placed + 1;
+        end
     end
-
 end
