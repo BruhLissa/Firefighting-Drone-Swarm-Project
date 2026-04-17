@@ -1,16 +1,23 @@
-function [outputArg1,outputArg2] = params(inputArg1,inputArg2)
-%PARAMS Summary of this function goes here
-%   Detailed explanation goes here
-arguments (Input)
-    inputArg1
-    inputArg2
-end
-
-arguments (Output)
-    outputArg1
-    outputArg2
-end
-
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
+function params = make_params()
+    % MAKE_PARAMS  Create simulation settings
+    
+    params.grid_size = [30, 30];
+    params.dt = 1;
+    params.max_steps = 150;
+    
+    params.n_drones = 5;
+    params.start_fires = 5;
+    params.rng_seed = 7;
+    
+    params.spread_orth = 0.12;      % orthogonal spread coefficient
+    params.decay = 0.03;            % global decay for burning cells
+    params.fire_stop_threshold = 0.10;
+    
+    params.seed_low = 0.5;          % initial fire seed intensity min
+    params.seed_high = 1.0;         % initial fire seed intensity max
+    
+    params.water_radius = 0;        % 0 = only current cell
+    params.plot_pause = 0.05;
+    
+    params.output_dir = pwd;
 end
