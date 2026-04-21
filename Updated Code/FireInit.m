@@ -14,8 +14,7 @@ while placed < params.start_fires
     c = randi(cols);
 
     if fire.intensity(r, c) == 0
-        fire.intensity(r, c) = params.seed_low + ...
-            (params.seed_high - params.seed_low) * rand();
+        fire.intensity(r, c) = params.seed_low + (params.seed_high - params.seed_low) * rand();
 
         fire.justSpawned(r, c) = 1;
         placed = placed + 1;

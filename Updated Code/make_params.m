@@ -1,5 +1,5 @@
 function params = make_params()
-% MAKE_PARAMS creates all simulation settings
+% MAKE_PARAMS creates all the parameters used in other functions
 
 params.grid_size = [30, 30];     % [rows, cols]
 params.dt = 1;                   % time step
@@ -18,3 +18,4 @@ params.seed_high = 0.7;          % maximum initial fire intensity
 
 params.plot_pause = 0.05;        % pause between frames for animation
 end
+

@@ -14,7 +14,6 @@ function [drone, fire] = updateDrones(drone, fire, params, allDrones)
 % Assign target
 drone = assignTarget(drone, fire, allDrones);
 
-% If no fire exists, do nothing
 if isempty(drone.target)
     return;
 end
@@ -25,14 +24,13 @@ target = drone.target;
 dx = sign(target(1) - current(1));
 dy = sign(target(2) - current(2));
 
-% Move one step toward target
 proposed = current + [dx, dy];
 
-% Keep inside grid
-proposed(1) = max(1, min(params.grid_size(1), proposed(1)));
-proposed(2) = max(1, min(params.grid_size(2), proposed(2)));
+% keep inside grid using Clamp
+proposed(1) = Clamp(proposed(1), 1, params.grid_size(1));
+proposed(2) = Clamp(proposed(2), 1, params.grid_size(2));
 
-% Prevent drones from moving into same cell
+% avoid collisions
 for j = 1:length(allDrones)
     if allDrones(j).id ~= drone.id
         if isequal(proposed, allDrones(j).position)
@@ -42,22 +40,26 @@ for j = 1:length(allDrones)
     end
 end
 
-% Update position
 drone.position = proposed;
 
-% Update logs
 moveDist = abs(proposed(1) - current(1)) + abs(proposed(2) - current(2));
 drone.distanceTraveled = drone.distanceTraveled + moveDist;
 drone.timeActive = drone.timeActive + params.dt;
 drone.path = [drone.path; proposed];
 
-% Extinguish fire in current cell and neighbors
+% extinguish a 3x3 area
 r = proposed(1);
 c = proposed(2);
 
-for rr = max(1, r-1):min(params.grid_size(1), r+1)
-    for cc = max(1, c-1):min(params.grid_size(2), c+1)
+r1 = Clamp(r-1, 1, params.grid_size(1));
+r2 = Clamp(r+1, 1, params.grid_size(1));
+c1 = Clamp(c-1, 1, params.grid_size(2));
+c2 = Clamp(c+1, 1, params.grid_size(2));
+
+for rr = r1:r2
+    for cc = c1:c2
         fire.intensity(rr, cc) = 0;
+        fire.justSpawned(rr, cc) = 0;
     end
 end
 
