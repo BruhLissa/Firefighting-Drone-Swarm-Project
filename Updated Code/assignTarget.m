@@ -1,5 +1,10 @@
 function drone = assignTarget(drone, fire, allDrones)
-% ASSIGNTARGET chooses a fire target while encouraging drones to spread out
+% ASSIGN_TARGET selects the highest intensity fire cell
+% Inputs:
+%   drone - single drone struct
+%   fire  - fire struct with intensity matrix
+% Output:
+%   drone - updated drone with target
 
 [rows, cols] = size(fire.intensity);
 

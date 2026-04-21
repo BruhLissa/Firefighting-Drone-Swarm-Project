@@ -1,5 +1,15 @@
 function [drone, fire] = updateDrones(drone, fire, params, allDrones)
-% UPDATEDRONES updates one drone for one step
+% updateDrone updates a single drone for one time step
+%
+% Inputs:
+%   drone      - current drone
+%   fire       - fire struct
+%   params     - simulation parameters
+%   allDrones  - all drones (for collision checking)
+%
+% Outputs:
+%   drone - updated drone
+%   fire  - updated fire
 
 % Assign target
 drone = assignTarget(drone, fire, allDrones);

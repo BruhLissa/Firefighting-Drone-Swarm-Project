@@ -1,5 +1,10 @@
 function drones = initializeDrones(params)
-% INITIALIZEDRONES initializes all drone agents
+% initializeDrones initializes all drone agents
+% Inputs:
+%   params.numDrones  - number of drones
+%   params.gridSize   - size of grid (NxN)
+% Output:
+%   drones - struct array of drone agents
 
 numDrones = params.n_drones;
 rows = params.grid_size(1);
