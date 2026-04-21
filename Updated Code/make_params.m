@@ -9,7 +9,7 @@ params.n_drones = 4;             % number of drones
 params.start_fires = 5;          % number of initial fire cells
 params.rng_seed = 5;             % random seed for reproducibility
 
-params.spread_orth = 0.11;       % fire spread amount to orthogonal neighbors
+params.spread_orth = 0.12;       % fire spread amount to orthogonal neighbors
 params.decay = 0.03;             % fire decay each step
 params.fire_stop_threshold = 0.10; % stop when all fire intensities are below this
 
