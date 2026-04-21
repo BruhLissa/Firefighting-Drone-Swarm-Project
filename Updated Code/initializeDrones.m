@@ -27,12 +27,15 @@ for i = 1:numDrones
         end
     end
 
-    drones(i).position = pos;          % [row, col]
-    drones(i).target = [];             % no target yet
-    drones(i).path = pos;              % start path log
+    drones(i).position = pos;
+    drones(i).target = [];
+    drones(i).path = pos;
     drones(i).timeActive = 0;
     drones(i).waterDrops = 0;
     drones(i).distanceTraveled = 0;
+    drones(i).nearMissCount = 0;
     drones(i).id = i;
+    drones(i).cellsExtinguished = 0;
+    drones(i).events = {sprintf('Drone %d initialized at (%d, %d)', i, pos(1), pos(2))};
 end
 end

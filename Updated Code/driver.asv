@@ -1,13 +1,14 @@
-clear, clc, close all;
+clear;
+clc;
+close all;
 
 params = make_params();
-
-rng('shuffle');   % different random seed each run
-
+rng(params.rng_seed);
 fire = FireInit(params);
 drones = initializeDrones(params);
 
 for step = 1:params.max_steps
+
     fire = fire_step(fire, params);
 
     for i = 1:length(drones)
@@ -20,11 +21,11 @@ for step = 1:params.max_steps
 
     pause(params.plot_pause);
 
-    % stops simulation once the fire is extinguished or when it reaches
-    % the threshold
     if all(fire.intensity(:) < params.fire_stop_threshold)
+        fprintf('Simulation stopped at step %d because the fire was extinguished.\n', step);
         break;
     end
 end
 
+% Create summary table + save files
 summaryTbl = Summarize_results(drones, fire, params);
